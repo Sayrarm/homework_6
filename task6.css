@@ -16,6 +16,7 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     font-family: Vivo Sans, monospace;
+    background-color: #FEF7E7;
 }
 
 @font-face {
@@ -29,6 +30,9 @@ body {
     padding: 10px 10px;
     width: 50px;
     height: 50px;
+    background-color: #FCE9BB;
+    border-radius: 50px;
+    cursor: pointer;
 }
 
 .containerImgBtns {
@@ -40,4 +44,34 @@ body {
 
 h1 {
     text-align: center;
+}
+
+.container {
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.container-img {
+    margin-bottom: 10px;
+}
+
+/*анимация*/
+
+@keyframes slideLeft {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.slide-left {
+    animation: slideLeft 0.5s ease;
+}
+
+.slide-right {
+    animation: slideRight 0.5s ease;
 }
