@@ -39,6 +39,7 @@ img.className = 'img';
 img.style.borderRadius = '20px';
 img.style.width = imageUrls[index].width;
 img.style.height = imageUrls[index].height;
+img.classList.add('active');
 img.src = imageUrls[index].url;
 containerImg.appendChild(img);
 
@@ -65,3 +66,4 @@ btnRight.addEventListener('click', function() {
     }
     updateImage();
 });
+
