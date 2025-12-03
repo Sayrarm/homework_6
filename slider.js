@@ -7,63 +7,72 @@ h1.className = 'h1';
 h1.textContent = 'Галерея картинок';
 slider.appendChild(h1);
 
-const containerImgBtns = document.createElement('div');
-containerImgBtns.className = 'containerImgBtns';
-slider.appendChild(containerImgBtns);
+const containerImgWithBtns = document.createElement('div');
+containerImgWithBtns.className = 'containerImgWithBtns';
+slider.appendChild(containerImgWithBtns);
 
 const btnLeft = document.createElement('button');
-btnLeft.className = 'btn-slider';
+btnLeft.className = 'btn-slider-left';
 btnLeft.textContent = '❮';
-containerImgBtns.appendChild(btnLeft);
+containerImgWithBtns.appendChild(btnLeft);
 
-const containerImg = document.createElement('div');
-containerImg.className = 'container-img';
-containerImgBtns.appendChild(containerImg);
+const containerImgs = document.createElement('div');
+containerImgs.className = 'container-imgs';
+containerImgWithBtns.appendChild(containerImgs);
+
+const imageUrls = [
+    { url: 'images/harry1.jpg' },
+    { url: 'images/harry2.jpg' },
+    { url: 'images/harry3.jpg' },
+    { url: 'images/harry4.jpg' },
+    { url: 'images/harry6.webp' }
+];
+// Создаем контейнеры для каждого слайда
+imageUrls.forEach((imageData, index) => {
+    const containerImg = document.createElement('div');
+    containerImg.className = 'container-img';
+
+    const img = document.createElement('img');
+    img.className = 'img';
+    img.src = imageData.url;
+
+    if (index === 0) {
+        img.classList.add('active');
+    }
+
+    containerImg.appendChild(img);
+    containerImgs.appendChild(containerImg);
+});
 
 const btnRight = document.createElement('button');
-btnRight.className = 'btn-slider';
+btnRight.className = 'btn-slider-right';
 btnRight.textContent = '❯';
-containerImgBtns.appendChild(btnRight);
-
-let index = 0;
-const imageUrls = [
-    { url: 'images/harry1.jpg', width: '800px', height: '500px' },
-    { url: 'images/harry2.jpg', width: '800px', height: '500px' },
-    { url: 'images/harry3.jpg', width: '800px', height: '500px' },
-    { url: 'images/harry4.jpg', width: '800px', height: '500px' },
-    { url: 'images/harry6.webp', width: '800px', height: '500px' }
-];
-
-const img = document.createElement('img');
-img.className = 'img';
-img.style.borderRadius = '20px';
-img.style.width = imageUrls[index].width;
-img.style.height = imageUrls[index].height;
-img.classList.add('active');
-img.src = imageUrls[index].url;
-containerImg.appendChild(img);
+containerImgWithBtns.appendChild(btnRight);
 
 
-// Функция обновления картинки
-function updateImage() {
-    img.style.width = imageUrls[index].width;
-    img.style.height = imageUrls[index].height;
-    img.src = imageUrls[index].url;
+let currentIndex = 0;
+
+
+// Функция смены слайдов
+function goToSlide(index) {
+    if (index < 0) {
+        index = imageUrls.length - 1;
+    } else if (index >= imageUrls.length) {
+        index = 0;
+    }
+
+    currentIndex = index; // Запоминаем текущий слайд
+    containerImgs.style.transform = `translateX(${-index * 100}%)`;
 }
 
-btnLeft.addEventListener('click', function() {
-    index--;
-    if (index < 0) {
-        index = imageUrls.length - 1; // переходим к последней
-    }
-    updateImage();
+// Добавляем обработчик клика для кнопки «Назад»
+btnLeft.addEventListener('click', () => {
+    goToSlide(currentIndex - 1);
 });
 
-btnRight.addEventListener('click', function() {
-    index++;
-    if (index >= imageUrls.length) {
-        index = 0; // переходим к первой
-    }
-    updateImage();
+// Добавляем обработчик клика для кнопки «Вперёд»
+btnRight.addEventListener('click', () => {
+    goToSlide(currentIndex + 1);
 });
 
+goToSlide(0);

@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -16,7 +16,7 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     font-family: Vivo Sans, monospace;
-    background-color: #FEF7E7;
+    background-color: #44397e;
 }
 
 @font-face {
@@ -26,35 +26,89 @@ body {
     src: local('Vivo Sans'), url('vivoSansGlobal-Light.ttf') format('truetype');
 }
 
-.btn-slider {
-    padding: 10px 10px;
-    width: 50px;
-    height: 50px;
-    background-color: #FCE9BB;
-    border-radius: 50px;
-    cursor: pointer;
-}
-
-.containerImgBtns {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+.container {
+    margin: 50px 10px 10px 10px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 h1 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-.container {
-    margin: 10px;
-    border: 1px solid black;
+/* Основной контейнер слайдера */
+.containerImgWithBtns {
+    width: 800px;
+    height: 500px;
+    border-radius: 20px;
+    max-width: 100%;
+    overflow: hidden; /* Обрезаем всё, что выходит за границы контейнера */
+    position: relative; /* Для позиционирования кнопок */
+    margin: 0 auto;
+}
+
+/* Контейнер всех слайдов */
+.container-imgs {
+    height: 100%;
+    display: flex; /* Размещаем слайды в одну линию */
+    transition: transform 0.5s ease-in-out; /* Анимация плавного смещения */
+}
+
+/* Каждый отдельный слайд */
+.container-img {
+    width: 100%; /* Занимает всю ширину контейнера */
+    flex-shrink: 0; /* Запрещаем уменьшение размера слайдов */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для изображений */
+.img {
+    width: 100%; /* Заменить ширину на 100% */
+    height: 100%; /* Заменить высоту на 100% */
+    object-fit: cover; /* Добавить для правильного заполнения */
+    object-position: center; /* Добавить для центрирования */
+
+    max-width: 100%;
+    display: block;
     border-radius: 20px;
 }
 
-.container-img {
-    margin-bottom: 10px;
+/* Кнопки «Назад» и «Вперёд» */
+.btn-slider-left, .btn-slider-right {
+    position: absolute; /* Располагаем кнопки поверх слайдов */
+    top: 50%; /* По вертикали по центру */
+    transform: translateY(-50%); /* Сдвигаем кнопки вверх на половину их высоты */
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон кнопок */
+    color: white; /* Белый цвет текста */
+    border: none; /* Убираем границы */
+    padding: 15px; /* Отступы внутри кнопки */
+    cursor: pointer; /* Изменяем курсор на указатель */
+    font-size: 24px; /* Размер шрифта */
+    font-weight: bold; /* Делаем текст жирным */
+    z-index: 2; /* Размещаем кнопки выше всех элементов */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
 }
 
-/*анимация*/
+.btn-slider-left:hover, .btn-slider-right:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
 
+/* Позиционируем кнопку «Назад» слева */
+.btn-slider-left {
+    left: 15px;
+}
+
+/* Позиционируем кнопку «Вперёд» справа */
+.btn-slider-right {
+    right: 15px;
+}
